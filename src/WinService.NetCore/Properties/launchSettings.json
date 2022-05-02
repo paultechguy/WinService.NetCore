@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WinService.NetCore": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
