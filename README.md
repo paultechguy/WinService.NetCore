@@ -2,23 +2,23 @@
 
 **Requirements:** Visual Studio 2022 with .NET Core 6
 
-This project was created to make spinning up new Windows Services simple.  The intention
-was to keep things as simple, but still provide a few basic needs for running a service.
+This project was created to make spinning up new Windows Services fairly easy. The intention
+was to keep things simple, but still provide some of the basics that a servicie would require.
 
 The basic needs included in this Windows Service project are:
 
-1. Normal Windows Service (long-running and support the Windows *sc* commands)
+1. Normal Windows Service (long-running and support for the Windows *sc* commands)
 2. Console support exists so things also run in a console window
-3. Logging support exists using Serilog (default is file-based)
+3. Logging support exists using Serilog (default is console and file)
 4. Email support exists, assuming you have access to an SMTP server (e.g. gmail)
 
 Yea, I know...you are wondering why there is no database support. It was very intentional to leave this
 out since there are several databases and database frameworks that exist.  I didn't want to complicate
-this starter project.
+this starter project and get into a *religious* discussion.
 
 Things should work right out-of-the-box.  You can build the solution and run the app in a console window,
 or install and run it as a service. See **Customize the Service** for making the service do your
-own magical stuff.
+own magic tricks.
 
 ## Customize the Service
 I suggest that before you begin customizing the code, you give things a test drive using the out-of-the-box
@@ -27,16 +27,17 @@ functionality.  Then when you are ready to customize it, modify the `ExecuteAsyn
 exits, the Windows Service will stop.
 
 **Note:** Be sure your code is sensitive to checking, somewhat frequently, the cancellation token to determine
-if there is an incoming request for the service to stop...then you can exit the `ExecuteAsync` method.
+if there is an incoming request for the service to stop...then you can safely exit the `ExecuteAsync` method and
+allow the service to stop.
 
 ## Build Solution
 Using Visual Studio 2022, open up the `src\WinService.NetCore.sln` and build the solution as you
 normally would.
 
 ## Run as a Console App
-After building, open up a console window and execute:
+After building, open up a console window and execute the following from your build directory:
 
-        C:\...\WinService.NetCore.exe
+        .\WinService.NetCore.exe
 
 ## Run as Windows Service
 The following commands can be executed in an elevated (administor mode) console window.  For some of the
@@ -63,7 +64,7 @@ steps, you can also use the standard Windows Services user-interface (e.g. start
 ## Logging
 
 By default, log files will be created in the subdirectory where the `WinService.NetCore.exe` file is located.
-The subdirectory is called *logs*.  The most recent 31 days of log files are saved.  For more information
+The subdirectory for log files is called *logs*.  The most recent 31 days of log files are saved.  For more information
 on the
 [Serilog](https://serilog.net/)
 configuration, see the `WinService.NetCore:appsettings.json` file.
