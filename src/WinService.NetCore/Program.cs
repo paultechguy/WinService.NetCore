@@ -20,10 +20,16 @@ using WinService.NetCore.Models;
 
 public class Program : IDisposable
 {
+	// this value really doesn't do much since the service name is passed in
+	// via the CLI, Windows sc.exe command, for the various commands like
+	// create, start, stop, etc.
 	private const string ServiceName = $"NET Core Windows Service";
 
 	private static readonly CancellationTokenSource CancelTokenSource = new CancellationTokenSource();
+
+	// assume we are in a production environment; also note the "DOTNETCORE_" vs. "ASPNETCORE_" environment
 	private static string environmentName = (Environment.GetEnvironmentVariable("DOTNETCORE_ENVIRONMENT") ?? "production").ToLower();
+
 	private bool disposed = false;
 
 	public void Dispose()
