@@ -8,12 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="stylecop\**" />
-		<EmbeddedResource Remove="stylecop\**" />
-		<None Remove="stylecop\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="CommandLineParser" Version="2.8.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.1" />
@@ -27,21 +21,8 @@
 		<PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
 		<PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
 	</ItemGroup>
 
-	<PropertyGroup>
-		<CodeAnalysisRuleSet>stylecop\stylecop.ruleset</CodeAnalysisRuleSet>
-	</PropertyGroup>
-	<ItemGroup>
-		<AdditionalFiles Include="stylecop\stylecop.json" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Include="stylecop\stylecop.ruleset" />
-	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\WinService.NetCore.Application\WinService.NetCore.Application.csproj" />
 	  <ProjectReference Include="..\WinService.NetCore.Core\WinService.NetCore.Core.csproj" />
@@ -55,13 +36,7 @@
 		<None Update="appsettings.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="appsettings.linux.production.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 		<None Update="appsettings.production.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="appsettings.windows.production.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
