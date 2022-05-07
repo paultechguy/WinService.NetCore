@@ -1,7 +1,5 @@
 # WinService.NetCore
 
-**Requirements:** Visual Studio 2022 with .NET Core 6
-
 This project was created to make spinning up new Windows Services fairly easy. The intention
 was to keep things simple, but still provide some of the basics that a servicie would require.
 
@@ -19,6 +17,10 @@ this starter project and get into a *religious* discussion.
 Things should work right out-of-the-box.  You can build the solution and run the app in a console window,
 or install and run it as a service. See **Customize the Service** for making the service do your
 own magic tricks.
+
+## Requirements
+- Windows 10 or higher
+- Visual Studio 2022 with .NET Core 6
 
 ## Customize the Service
 I suggest that before you begin customizing the code, you give things a test drive using the out-of-the-box
@@ -93,7 +95,7 @@ To enable email, you will need to do two things:
 
     For local (i.e. localhost) testing you can use [Papercut-SMTP](https://www.papercut-smtp.com/);
 this is an excellent tool for verifying email is working before your deploy to production environments.
-You can also use gmail by creating an *App Password* in your email account.
+You can also use Gmail by creating an *App Password* in your Gmail account.
 
     The following two sections show the changes in `WinService.NetCore:appsettings.json` for
 configurating an SMTP server.
@@ -114,9 +116,13 @@ configurating an SMTP server.
           "ServerHost": "smtp.gmail.com",
           "ServerPort": "587",
           "ServerEnableSsl": "true",
-          "ServerUsername": "{your gmail app username (i.e. your email address)}",
-          "ServerPassword": "{your gmail app password}"
+          "ServerUsername": "{your Gmail app username (i.e. your Gmail email address)}",
+          "ServerPassword": "{your Gmail app password}"
         }
 
-Last but not least, this project as inspired by the Microsoft documentation
+## License
+[MIT](https://github.com/paultechguy/WinService.NetCore/blob/develop/LICENSE.txt)
+
+## Credits
+This project as inspired by the Microsoft documentation
 on [Windows Services](https://docs.microsoft.com/en-us/dotnet/core/extensions/windows-service).
