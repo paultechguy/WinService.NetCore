@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using WinService.NetCore.App;
+using WinService.NetCore.Application;
 using WinService.NetCore.Core;
 using WinService.NetCore.Core.Models;
 using WinService.NetCore.Email;
