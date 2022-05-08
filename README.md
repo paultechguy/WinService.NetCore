@@ -122,7 +122,9 @@ configurating an SMTP server.
 
 ## .editorConfig
 The code has its own set of formatting and language rules.  If you don't like these, feel free
-to modify the .editorConfig file, or remove it entirely from the project.
+to modify the .editorConfig file, or remove it entirely from the project. If you remove the
+.editorConfig, then you can also remove the StyleCop.Anayzers nuget from all projects in the
+solution.
 
 ## License
 [MIT](https://github.com/paultechguy/WinService.NetCore/blob/develop/LICENSE.txt)
