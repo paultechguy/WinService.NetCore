@@ -1,8 +1,8 @@
-﻿// <copyright file="AppService.cs" company="CompanyName">
+﻿// <copyright file="ApplicationService.cs" company="CompanyName">
 // Copyright (c) CompanyName. All rights reserved.
 // </copyright>
 
-namespace WinService.NetCore.App;
+namespace WinService.NetCore.Application;
 
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -12,10 +12,10 @@ using WinService.NetCore.Core.Models;
 
 public class ApplicationService : IApplicationService
 {
+	private const int SleepMs = 5000;
 	private readonly ILogger<ApplicationService> logger;
 	private readonly ApplicationSettings appSettings;
 	private readonly IEmailSender emailSender;
-	private const int sleepMs = 5000;
 
 	public ApplicationService(
 		ILogger<ApplicationService> logger,
@@ -31,12 +31,15 @@ public class ApplicationService : IApplicationService
 	{
 		this.logger.LogInformation($"Starting: {nameof(ApplicationService)}.{nameof(this.ExecuteAsync)}");
 
-		this.SendInitialEmailAsync().Wait(); // wait
+		this.SendEmailAsync(
+				$"Email from {nameof(ApplicationService)}",
+				$"<html><head></head><body><h1>Hello World!</h1><p>I like it.</p></body></html>")
+			.Wait(cancelToken); // wait
 
 		while (!cancelToken.IsCancellationRequested)
 		{
-			this.logger.LogInformation($"Doing somthing important every {sleepMs} milliseconds: {nameof(ApplicationService)}.{nameof(this.ExecuteAsync)}...");
-			cancelToken.WaitHandle.WaitOne(sleepMs);
+			this.logger.LogInformation($"Doing somthing important every {SleepMs} milliseconds: {nameof(ApplicationService)}.{nameof(this.ExecuteAsync)}...");
+			cancelToken.WaitHandle.WaitOne(SleepMs);
 		}
 
 		this.logger.LogInformation($"Ending: {nameof(ApplicationService)}.{nameof(this.ExecuteAsync)}");
@@ -44,19 +47,19 @@ public class ApplicationService : IApplicationService
 		return Task.CompletedTask;
 	}
 
-	private async Task SendInitialEmailAsync()
+	private async Task SendEmailAsync(string subject, string body)
 	{
 		// if it appears we have email settings, send an email we are starting
 		if (!string.IsNullOrWhiteSpace(this.appSettings.MessageFromEmailAddress)
 			&& !string.IsNullOrWhiteSpace(this.appSettings.MessageToEmailAddress))
 		{
-			this.logger.LogInformation("Sending email to {to}", this.appSettings.MessageToEmailAddress);
+			this.logger.LogInformation("Sending email; to:{to}, subject:{subject}", this.appSettings.MessageToEmailAddress, subject);
 
 			await emailSender.SendHtmlAsync(
 				this.appSettings.MessageFromEmailAddress,
 				this.appSettings.MessageToEmailAddress,
-				$"Email from {nameof(ApplicationService)}",
-				$"<html><head></head><body><h1>Hello World!</h1><p>I like it.</p></body></html>");
+				subject,
+				body);
 		}
 	}
 }

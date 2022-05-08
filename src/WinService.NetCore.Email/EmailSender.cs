@@ -15,14 +15,11 @@ using WinService.NetCore.Core.Models;
 public class EmailSender : IEmailSender
 {
 	private readonly EmailSettings emailSettings;
-	private readonly ILogger<EmailSender> logger;
 
 	public EmailSender(
-		IOptions<EmailSettings> emailSettings,
-		ILogger<EmailSender> logger)
+		IOptions<EmailSettings> emailSettings)
 	{
 		this.emailSettings = emailSettings.Value;
-		this.logger = logger;
 	}
 
 	public async Task SendPlainAsync(

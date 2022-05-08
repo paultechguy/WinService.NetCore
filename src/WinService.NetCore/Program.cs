@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using WinService.NetCore.App;
+using WinService.NetCore.Application;
 using WinService.NetCore.Core;
 using WinService.NetCore.Core.Models;
 using WinService.NetCore.Email;
@@ -25,10 +25,10 @@ public class Program : IDisposable
 	// create, start, stop, etc.
 	private const string ServiceName = $"NET Core Windows Service";
 
-	private static readonly CancellationTokenSource CancelTokenSource = new CancellationTokenSource();
+	private static readonly CancellationTokenSource CancelTokenSource = new();
 
 	// assume we are in a production environment; also note the "DOTNETCORE_" vs. "ASPNETCORE_" environment
-	private static string environmentName = (Environment.GetEnvironmentVariable("DOTNETCORE_ENVIRONMENT") ?? "production").ToLower();
+	private static readonly string EnvironmentName = (Environment.GetEnvironmentVariable("DOTNETCORE_ENVIRONMENT") ?? "production").ToLower();
 
 	private bool disposed = false;
 
@@ -89,7 +89,7 @@ public class Program : IDisposable
 			{
 				configHost.SetBasePath(Directory.GetCurrentDirectory())
 					.AddJsonFile($"appsettings.json", optional: false, reloadOnChange: true)
-					.AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true)
+					.AddJsonFile($"appsettings.{EnvironmentName}.json", optional: true, reloadOnChange: true)
 					.AddEnvironmentVariables()
 					.AddCommandLine(Environment.GetCommandLineArgs());
 			})
@@ -104,9 +104,7 @@ public class Program : IDisposable
 	}
 
 	/// <summary>
-	/// -----------------------------------------------------
 	/// MAIN WINDOWS SERVICE HERE.
-	/// -----------------------------------------------------
 	/// </summary>
 	/// <param name="args">The command-line arguments.</param>
 	/// <returns>Zero if success; otherwise a non-zero error code.</returns>
