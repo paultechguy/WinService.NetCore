@@ -28,7 +28,7 @@ public class Program : IDisposable
 	private static readonly CancellationTokenSource CancelTokenSource = new();
 
 	// assume we are in a production environment; also note the "DOTNETCORE_" vs. "ASPNETCORE_" environment
-	private static readonly string environmentName = (Environment.GetEnvironmentVariable("DOTNETCORE_ENVIRONMENT") ?? "production").ToLower();
+	private static readonly string EnvironmentName = (Environment.GetEnvironmentVariable("DOTNETCORE_ENVIRONMENT") ?? "production").ToLower();
 
 	private bool disposed = false;
 
@@ -89,7 +89,7 @@ public class Program : IDisposable
 			{
 				configHost.SetBasePath(Directory.GetCurrentDirectory())
 					.AddJsonFile($"appsettings.json", optional: false, reloadOnChange: true)
-					.AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true)
+					.AddJsonFile($"appsettings.{EnvironmentName}.json", optional: true, reloadOnChange: true)
 					.AddEnvironmentVariables()
 					.AddCommandLine(Environment.GetCommandLineArgs());
 			})
@@ -104,9 +104,7 @@ public class Program : IDisposable
 	}
 
 	/// <summary>
-	/// -----------------------------------------------------
 	/// MAIN WINDOWS SERVICE HERE.
-	/// -----------------------------------------------------
 	/// </summary>
 	/// <param name="args">The command-line arguments.</param>
 	/// <returns>Zero if success; otherwise a non-zero error code.</returns>

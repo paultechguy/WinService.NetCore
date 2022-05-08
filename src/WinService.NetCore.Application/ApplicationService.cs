@@ -1,4 +1,4 @@
-﻿// <copyright file="AppService.cs" company="CompanyName">
+﻿// <copyright file="ApplicationService.cs" company="CompanyName">
 // Copyright (c) CompanyName. All rights reserved.
 // </copyright>
 
@@ -12,10 +12,10 @@ using WinService.NetCore.Core.Models;
 
 public class ApplicationService : IApplicationService
 {
+	private const int SleepMs = 5000;
 	private readonly ILogger<ApplicationService> logger;
 	private readonly ApplicationSettings appSettings;
 	private readonly IEmailSender emailSender;
-	private const int sleepMs = 5000;
 
 	public ApplicationService(
 		ILogger<ApplicationService> logger,
@@ -33,13 +33,13 @@ public class ApplicationService : IApplicationService
 
 		this.SendEmailAsync(
 				$"Email from {nameof(ApplicationService)}",
-				$"<html><head></head><body><h1>Hello World!</h1><p>I like it.</p></body></html>"
-			).Wait(cancelToken); // wait
+				$"<html><head></head><body><h1>Hello World!</h1><p>I like it.</p></body></html>")
+			.Wait(cancelToken); // wait
 
 		while (!cancelToken.IsCancellationRequested)
 		{
-			this.logger.LogInformation($"Doing somthing important every {sleepMs} milliseconds: {nameof(ApplicationService)}.{nameof(this.ExecuteAsync)}...");
-			cancelToken.WaitHandle.WaitOne(sleepMs);
+			this.logger.LogInformation($"Doing somthing important every {SleepMs} milliseconds: {nameof(ApplicationService)}.{nameof(this.ExecuteAsync)}...");
+			cancelToken.WaitHandle.WaitOne(SleepMs);
 		}
 
 		this.logger.LogInformation($"Ending: {nameof(ApplicationService)}.{nameof(this.ExecuteAsync)}");

@@ -1,4 +1,4 @@
-// <copyright file="WindowsBackgroundService.cs" company="CompanyName">
+﻿// <copyright file="WindowsBackgroundService.cs" company="CompanyName">
 // Copyright (c) CompanyName. All rights reserved.
 // </copyright>
 

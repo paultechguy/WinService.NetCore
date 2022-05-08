@@ -220,13 +220,21 @@ dotnet_naming_style.begins_with_i.required_suffix =
 dotnet_naming_style.begins_with_i.word_separator = 
 dotnet_naming_style.begins_with_i.capitalization = pascal_case
 
+# OTHER GENERAL PJC
+
+# Should not apply when log message template is a resource string (temp bug with analysis)
+dotnet_diagnostic.CA2254.severity = none
+
 # ----------------------------------------------------------------------------------------------------------------------
 # SyleCop.Analyzers rules - note that the URLs below are for tag 1.1.118
 # ----------------------------------------------------------------------------------------------------------------------
 
+#
+dotnet_diagnostic.SA0001.severity = none # SA0001XmlCommentAnalysisDisabled
+
 # Spacing Rules (SA1000-) https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/1.1.118/documentation/SpacingRules.md
 
-dotnet_diagnostic.SA1000.severity = warning
+dotnet_diagnostic.SA1000.severity = none # Keyword new should be followed by a space (bug in stylecop)
 dotnet_diagnostic.SA1001.severity = warning
 dotnet_diagnostic.SA1002.severity = warning
 dotnet_diagnostic.SA1003.severity = warning
@@ -278,7 +286,7 @@ dotnet_diagnostic.SA1116.severity = none    # Waste of new lines in simple scena
 dotnet_diagnostic.SA1117.severity = none    # Waste of new lines in simple scenarios
 dotnet_diagnostic.SA1118.severity = none    # Noisy in UTs
 dotnet_diagnostic.SA1119.severity = warning
-dotnet_diagnostic.SA1120.severity = warning
+dotnet_diagnostic.SA1120.severity = none    # Comments should contain text
 dotnet_diagnostic.SA1121.severity = warning
 dotnet_diagnostic.SA1122.severity = warning
 dotnet_diagnostic.SA1123.severity = warning
@@ -370,7 +378,7 @@ dotnet_diagnostic.SA1508.severity = warning
 dotnet_diagnostic.SA1509.severity = warning
 dotnet_diagnostic.SA1510.severity = warning
 dotnet_diagnostic.SA1511.severity = warning
-dotnet_diagnostic.SA1512.severity = warning
+dotnet_diagnostic.SA1512.severity = none  #Single-line comments should not be followed by a blank line
 dotnet_diagnostic.SA1513.severity = none # on short methods, it does not apply
 dotnet_diagnostic.SA1514.severity = warning
 dotnet_diagnostic.SA1515.severity = none # we do not respect this
