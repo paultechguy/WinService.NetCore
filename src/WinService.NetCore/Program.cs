@@ -25,10 +25,10 @@ public class Program : IDisposable
 	// create, start, stop, etc.
 	private const string ServiceName = $"NET Core Windows Service";
 
-	private static readonly CancellationTokenSource CancelTokenSource = new CancellationTokenSource();
+	private static readonly CancellationTokenSource CancelTokenSource = new();
 
 	// assume we are in a production environment; also note the "DOTNETCORE_" vs. "ASPNETCORE_" environment
-	private static string environmentName = (Environment.GetEnvironmentVariable("DOTNETCORE_ENVIRONMENT") ?? "production").ToLower();
+	private static readonly string environmentName = (Environment.GetEnvironmentVariable("DOTNETCORE_ENVIRONMENT") ?? "production").ToLower();
 
 	private bool disposed = false;
 

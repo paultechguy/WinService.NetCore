@@ -34,7 +34,7 @@ public class ApplicationService : IApplicationService
 		this.SendEmailAsync(
 				$"Email from {nameof(ApplicationService)}",
 				$"<html><head></head><body><h1>Hello World!</h1><p>I like it.</p></body></html>"
-			).Wait(); // wait
+			).Wait(cancelToken); // wait
 
 		while (!cancelToken.IsCancellationRequested)
 		{
