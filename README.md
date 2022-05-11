@@ -53,6 +53,9 @@ steps, you can also use the standard Windows Services user-interface (e.g. start
 
         sc.exe start "My Service Name"
 
+    By default, the *Startup Type* for the service is Manual.  If you want it to automatically start when
+the computer is rebooted, use the Windows Services UI to update it.
+
 3) Stop the service
 
         sc.exe stop "My Service Name"
