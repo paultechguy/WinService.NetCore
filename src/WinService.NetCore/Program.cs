@@ -87,9 +87,13 @@ public class Program : IDisposable
 		var builder = Host.CreateDefaultBuilder(args)
 			.ConfigureHostConfiguration(configHost =>
 			{
+				// *.user.json not in repo, but allows user to override without worry about checking in
+
 				configHost.SetBasePath(Directory.GetCurrentDirectory())
 					.AddJsonFile($"appsettings.json", optional: false, reloadOnChange: true)
+					.AddJsonFile($"appsettings.user.json", optional: true, reloadOnChange: true)
 					.AddJsonFile($"appsettings.{EnvironmentName}.json", optional: true, reloadOnChange: true)
+					.AddJsonFile($"appsettings.{EnvironmentName}.user.json", optional: true, reloadOnChange: true)
 					.AddEnvironmentVariables()
 					.AddCommandLine(Environment.GetCommandLineArgs());
 			})
