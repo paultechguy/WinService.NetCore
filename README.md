@@ -1,7 +1,7 @@
 # WinService.NetCore
 
 This project was created to make spinning up new Windows Services fairly easy. The intention
-was to keep things simple, but still provide some of the basics that a servicie would require.
+was to keep things simple, but still provide some of the basics that a service would require.
 
 The basic needs included in this Windows Service project are:
 
